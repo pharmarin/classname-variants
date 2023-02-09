@@ -7,6 +7,8 @@ import {
   Ref,
 } from "react";
 
+import { twMerge } from "tailwind-merge";
+
 import {
   Variants,
   variants,
@@ -44,9 +46,7 @@ export function variantProps<
     }
 
     // Add the optionally passed className prop for chaining
-    result.className = [props.className, variantClassName(props)]
-      .filter(Boolean)
-      .join(" ");
+    result.className = twMerge(variantClassName(props), props.className);
 
     return result as { className: string } & Omit<P, keyof C["variants"]>;
   };
